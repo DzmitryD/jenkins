@@ -29,6 +29,7 @@ pipeline {
             }
             steps {
               sh '''
+              cp index.j2 /etc/ansible/roles/apache/templates/index.j2
               cd /etc/ansible
               ansible-playbook Lab0903.yml
               '''
