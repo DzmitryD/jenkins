@@ -1,0 +1,37 @@
+#!groovy
+// create_infrastructure_and_update
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent none
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("First step build terra") {
+        agent { 
+            label 'ubuntu_terraform'
+            }
+            steps {
+              sh '''
+              cd /home/ubuntu/terraform/Lab0903
+              terraform init
+              terraform apply -auto-approve
+              '''
+            }
+        }
+  
+        stage("First step build ansible") {
+        agent { 
+            label 'ubuntu_ansible'
+            }
+            steps {
+              sh '''
+              cd /etc/ansible
+              ansible-playbook Lab0903.yml
+              '''
+            }
+        }
+    }
+}
