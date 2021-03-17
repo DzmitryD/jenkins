@@ -16,7 +16,7 @@ pipeline {
                 echo " ============== start building image =================="
                 dir ('docker/') {
                        sh '''
-                          docker build . -t mycontainer'
+                          docker build . -t mycontainer
                           docker run -d -p 80:80 mycontainer bash
                           '''
                 }
