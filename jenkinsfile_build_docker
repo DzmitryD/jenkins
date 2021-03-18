@@ -17,7 +17,7 @@ pipeline {
                 dir ('docker/') {
                        sh '''
                           docker build . -t mycontainer
-                          docker run -d -p 80:80 mycontainer bash
+                          docker run -d -p 80:80 mycontainer
                           '''
                 }
             }
